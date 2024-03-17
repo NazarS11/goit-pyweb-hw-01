@@ -1,7 +1,7 @@
 import pickle
 from datetime import datetime as dtdt
 from datetime import timedelta as td
-from classes import AddressBook, Record
+from classes import AddressBook, Record, MessageBot
 
 def input_error(func):
     def inner(*args, **kwargs):
@@ -146,37 +146,38 @@ def load_data(filename="addressbook.pkl"):
 @input_error
 def main():
     book = load_data()
-    print("Welcome to the assistant bot!")
+    bot = MessageBot()
+    bot.message("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter a command: ")
         command, *args = parse_input(user_input)
 
         if command in ["close", "exit"]:
             save_data(book)
-            print("Good bye!")
+            bot.message("Good bye!")
             break
         elif command == "hello":
-            print("How can I help you?")
+            bot.message("How can I help you?")
         elif command == "add":
-            print(add_contact(book, *args))
+            bot.message(add_contact(book, *args))
         elif command == "delete-phone":
-            print(delete_phone(book, *args)) 
+            bot.message(delete_phone(book, *args)) 
         elif command == "change":
-            print(change_phone(book, *args))
+            bot.message(change_phone(book, *args))
         elif command == "add-birthday":
-            print(add_birthday(book, *args))
+            bot.message(add_birthday(book, *args))
         elif command == "show-birthday":
-            print(show_birthday(book, *args))
+            bot.message(show_birthday(book, *args))
         elif command == "phone":
-            print(show_phone(book, *args))
+            bot.message(show_phone(book, *args))
         elif command == "birthdays":
-            print(show_birthdays(book))        
+            bot.message(show_birthdays(book))        
         elif command == "all":
-            print(display_contacts(book))
+            bot.message(display_contacts(book))
         elif command == "delete-contact":
-            print(delete_contact(book, *args))    
+            bot.message(delete_contact(book, *args))    
         else:
-            print("Invalid command.")
+            bot.message("Invalid command.")
 
 
 if __name__ == '__main__':

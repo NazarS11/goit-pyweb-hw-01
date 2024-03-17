@@ -1,8 +1,16 @@
 from collections import UserDict
 import re
 from datetime import datetime as dtdt
+from abc import ABC, abstractmethod
 
+class AbstractBot(ABC):
+    @abstractmethod
+    def message(self, message):
+        pass
 
+class MessageBot(AbstractBot):
+    def message(self, message):
+        print(message)
 
 class Field:                                                                                                    
     def __init__(self, value):
