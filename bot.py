@@ -34,6 +34,7 @@ def add_contact(address_book, name, phone):
             return record
         else:
             record.add_phone(phone)
+            return record
     except ValueError as e:
         return f"Error: {e}"
 
@@ -173,9 +174,11 @@ def main():
         elif command == "birthdays":
             bot.message(show_birthdays(book))        
         elif command == "all":
-            bot.message(display_contacts(book))
+            (display_contacts(book))
         elif command == "delete-contact":
-            bot.message(delete_contact(book, *args))    
+            bot.message(delete_contact(book, *args))
+        elif command == "help":
+            bot.message(bot.help())  
         else:
             bot.message("Invalid command.")
 

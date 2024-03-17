@@ -2,15 +2,34 @@ from collections import UserDict
 import re
 from datetime import datetime as dtdt
 from abc import ABC, abstractmethod
+from colorama import Fore, Style, init
+
 
 class AbstractBot(ABC):
     @abstractmethod
     def message(self, message):
         pass
 
+    @abstractmethod
+    def help(self):
+        pass
+
 class MessageBot(AbstractBot):
     def message(self, message):
         print(message)
+
+    def help(self):
+        init(autoreset=True)
+        help = f"{Fore.RED}add {Fore.YELLOW}[name] [phone]{Fore.BLUE} - add a new contact to an Address book\n" \
+                    f"{Fore.RED}change {Fore.YELLOW}[name] [old_phone] [new_phone]{Fore.BLUE} - change phone number\n" \
+                    f"{Fore.RED}add-birthday {Fore.YELLOW}[name] [birthday]{Fore.BLUE} - add birthday\n" \
+                    f"{Fore.RED}phone {Fore.YELLOW}[name]{Fore.BLUE} - show phone numbers\n" \
+                    f"{Fore.RED}show-birthday {Fore.YELLOW}[name]{Fore.BLUE} - show birthday\n" \
+                    f"{Fore.RED}birthdays{Fore.BLUE} - show upcoming birthdays\n" \
+                    f"{Fore.RED}delete-contact {Fore.YELLOW}[name]{Fore.BLUE} - delete contact from Address book\n" \
+                    f"{Fore.RED}all{Fore.BLUE} - show all contacts\n" \
+                    f"{Fore.RED}exit{Fore.BLUE} or {Fore.RED}close{Fore.BLUE} - close program and save Address book"
+        return help   
 
 class Field:                                                                                                    
     def __init__(self, value):
