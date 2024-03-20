@@ -174,7 +174,7 @@ def main():
         elif command == "birthdays":
             bot.message(show_birthdays(book))        
         elif command == "all":
-            (display_contacts(book))
+            bot.message(display_contacts(book))
         elif command == "delete-contact":
             bot.message(delete_contact(book, *args))
         elif command == "help":
